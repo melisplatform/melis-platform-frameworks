@@ -23,7 +23,7 @@
     "ext-openssl": "*",
     "ext-json": "*",
     "ext-pdo_mysql": "*",
-    "melisplatform/melis-core": "*",
+    "melisplatform/melis-core": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.8"
