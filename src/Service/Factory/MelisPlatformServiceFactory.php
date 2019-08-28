@@ -26,5 +26,4 @@ class MelisPlatformServiceFactory implements FactoryInterface
 
         return $service;
     }
-
 }
