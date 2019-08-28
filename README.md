@@ -20,8 +20,8 @@ the application to be executed, this can be done by adding this data array on th
     'index-path' => []
 ],
 ```
-'index-path' must set the path of the application index.php file for example 'laravel/public/index.php'
-not including the /thirdparty directory in the path.
+'index-path' must set the path of the application index.php file inside /thirdparty in the root directory, for example 'laravel/public/index.php'
+do not include the /thirdparty directory in the path.
 
 ### Service and implementation
 This module has a service MelisPlatformService to call in order to get a response from 
