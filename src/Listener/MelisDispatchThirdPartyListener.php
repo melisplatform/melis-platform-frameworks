@@ -27,7 +27,7 @@ class MelisDispatchThirdPartyListener implements ListenerAggregateInterface
          * try to execute Third party frameworks and return as content
          * else this will proceed to 404 page
          */
-        $events->attach('dispatch.error', array($this, 'onDispatchError'), -1000);
+        $events->attach('dispatch.error', array($this, 'onDispatchError'), -999);
     }
 
     public function onDispatchError($e)
