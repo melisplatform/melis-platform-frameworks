@@ -18,7 +18,7 @@
     "module-name": "MelisPlatformFrameworks"
   },
   "require": {
-    "melisplatform/melis-core": "*"
+    "melisplatform/melis-core": "^3.1"
   },
   "autoload": {
     "psr-4": {
