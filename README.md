@@ -4,7 +4,7 @@ This Module handles the execution of Third party framework and return the conten
 request, it also provides a Service in order to make a request to the third party.
 
 ### Prerequisites
-This module requires melisplatform/melis-core installed.
+This module requires ``melisplatform/melis-core`` installed.
 This will automatically be done when using composer.
 
 ### Installing
@@ -20,20 +20,59 @@ the application to be executed, this can be done by adding this data array on th
     'index-path' => []
 ],
 ```
-'index-path' must set the path of the application index.php file inside /thirdparty in the root directory. 
-For example 'laravel/public/index.php' do not includes the /thirdparty directory in the path.
+``'index-path'`` must set the path of the application index.php file inside ``/thirdparty`` in the root directory. 
+For example 'laravel/public/index.php' do not includes the ``/thirdparty`` directory in the path.
+
+### Frameworks
+Frameworks response MUST modify to return the response content and the status of the request,
+here's an example of Laravel framework integration as third party framework
+
+At the last part of the code the index.php file is generating the response by calling ``send()`` method
+then after terminate the application by ``$kernel->terminate($request, $response)``, as syntax below:
+```
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+
+$response = $kernel->handle(
+    $request = Illuminate\Http\Request::capture()
+);
+
+$response->send();
+
+$kernel->terminate($request, $response);
+```
+
+In the integration of third party framework instead of displaying the response and terminating in the index.php file,
+this will return an array of data containing the content using ``getContent()`` and status ``getStatusCode`` from Response object.
+
+In this case Melis platform will determine the return values and return as Response from zend application.
+```
+return [
+    'statusCode' => $response->getStatusCode(),
+    'content' => $response->getContent(),
+];
+```
 
 ### Service and implementation
-This module has a service MelisPlatformService to call in order to get a response from 
+This module has a service ``MelisPlatformService`` to call in order to get a response from 
 third party framework. By specifying the route of the request it will execute a request and 
 return the content as the result.
 
 Example:
 ```
 $thirdPartySrv = $this->getServiceLocator()->get('MelisPlatformService');
-$thirdPartySrv->setRoute('/list');
+$thirdPartySrv->setRoute('/melis/list');
 $response = $thirdPartySrv->getContent();
 ```
 
+## Authors
+
+* **Melis Technology** - [www.melistechnology.com](https://www.melistechnology.com/)
+
+See also the list of [contributors](https://github.com/melisplatform/melis-core/contributors) who participated in this project.
+
+
+## License
+
+This project is licensed under the OSL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
 
 
