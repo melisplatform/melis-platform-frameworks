@@ -44,7 +44,16 @@ class MelisPlatformService implements ServiceLocatorAwareInterface, EventManager
     public function getContent()
     {
         try{
-            $responseContent = file_get_contents($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'].$this->geRoute());
+            $opts = [
+                'http' => [
+                    'header'=> 'Cookie: ' . $_SERVER['HTTP_COOKIE']
+                ]
+            ];
+
+            $context = stream_context_create($opts);
+            session_write_close();
+
+            $responseContent = file_get_contents($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'].$this->geRoute(), false, $context);
         }catch (\Exception $e){
             return $e->getMessage();
         }
