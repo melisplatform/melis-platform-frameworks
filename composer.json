@@ -24,5 +24,10 @@
     "psr-4": {
       "MelisPlatformFrameworks\\": "src/"
     }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "@php thirdpart-mkdir"
+    ]
   }
 }
