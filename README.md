@@ -68,7 +68,7 @@ return the content as the result.
 Example:
 ```
 $thirdPartySrv = $this->getServiceLocator()->get('MelisPlatformService');
-$thirdPartySrv->setRoute('/melis/list');
+$thirdPartySrv->setRoute('/melis/lravel-list');
 $response = $thirdPartySrv->getContent();
 ```
 
