@@ -44,16 +44,32 @@ class MelisPlatformService implements ServiceLocatorAwareInterface, EventManager
     public function getContent()
     {
         try{
-            $opts = [
-                'http' => [
-                    'header'=> 'Cookie: ' . $_SERVER['HTTP_COOKIE']
-                ]
-            ];
+            //prepare the url
+            $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'].$this->geRoute();
+            /**
+             * use CURl to get the content of the request
+             * if CURl extension is available
+             */
+            if(function_exists('curl_version')){
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_HEADER, false);
+                curl_setopt($curl, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
+                session_write_close();
+                $responseContent = curl_exec($curl);
+                curl_close($curl);
+            }else {
+                $opts = [
+                    'http' => [
+                        'header' => 'Cookie: ' . $_SERVER['HTTP_COOKIE']
+                    ]
+                ];
+                $context = stream_context_create($opts);
+                session_write_close();
 
-            $context = stream_context_create($opts);
-            session_write_close();
-
-            $responseContent = file_get_contents($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'].$this->geRoute(), false, $context);
+                $responseContent = file_get_contents($url, false, $context);
+            }
         }catch (\Exception $e){
             return $e->getMessage();
         }
