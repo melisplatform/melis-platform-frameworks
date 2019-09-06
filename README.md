@@ -12,8 +12,14 @@ This will automatically be done when using composer.
 composer require melisplatform/melis-platform-frameworks
 ```
 ### Adding Third Party Frameworks
-Third Party Frameworks are located at the root of Melis Platform application ``/thirdparty``, inside this directory you can 
-you can place your desire Frameworks.
+Third Party Frameworks are located at the root of Melis Platform application ``/thirdparty``, 
+inside this directory you can place your desired Frameworks.
+<br>Framework skeletons for Melis Platform can be downloaded here:
+<br>[Laravel](http://marketplace.melisplatform.com/frameworks/laravel-6-skeleton-melis.zip),
+[Symfony](http://marketplace.melisplatform.com/frameworks/symfony-4-skeleton-melis.zip),
+[Lumen](http://marketplace.melisplatform.com/frameworks/lumen-5.8-skeleton-melis.zip),
+[Silex](http://marketplace.melisplatform.com/frameworks/silex-2-skeleton-melis.zip)
+
 ```
 ...
 /module
