@@ -11,9 +11,9 @@ This will automatically be done when using composer.
 ```
 composer require melisplatform/melis-platform-frameworks
 ```
-### Adding Third Party Framework
-Third Party Framework are located at the root of Melis Platform application ``/thirdparty``, inside this directory you can 
-you can place your desire Framework.
+### Adding Third Party Frameworks
+Third Party Frameworks are located at the root of Melis Platform application ``/thirdparty``, inside this directory you can 
+you can place your desire Frameworks.
 ```
 ...
 /module
