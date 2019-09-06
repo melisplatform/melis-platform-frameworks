@@ -11,19 +11,44 @@ This will automatically be done when using composer.
 ```
 composer require melisplatform/melis-platform-frameworks
 ```
+### Adding Third Party Framework
+Third Party Framework are located at the root of Melis Platform application ``/thirdparty``, inside this directory you can 
+you can place your desire Framework.
+```
+...
+/module
+/public
+/storage
+/test
+/thirdparty
+    /Laravel
+        /app
+        /bootstrap
+        /config
+        ...
+    /Symfony
+        /bin
+        /config
+        /public
+        ...
+...
+```
+Above is an example of Laravel framework added to ``/thirdparty`` directory.
+**Note:** You can decide what would be the name of the framework directory name 
+and then apply it on your configuration below.
 
 ### Third Party Framework Execution
-When executing the third party framework a config data MUST be declared in the config file in order to determine 
-the application to be executed, this can be done by adding this data array on the config file:
+**When executing the third party framework a config data MUST be declared in the config file in order to determine 
+the application to be executed**, this can be done by adding this data array on the config file:
 ```
 'third-party-framework' => [
     'index-path' => [
-        'laravel/public/index.php'
+        'Laravel/public/index.php'
     ]
 ],
 ```
 ``'index-path'`` must set the path of the application index.php file inside ``/thirdparty`` in the root directory. 
-For example 'laravel/public/index.php'. DO NOT include the ``/thirdparty`` directory in the path.
+For example 'Laravel/public/index.php'. DO NOT include the ``/thirdparty`` directory in the path.
 
 ### Third Party Frameworks modification
 Frameworks response MUST be modified to return the response content and the status of the request,
