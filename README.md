@@ -33,7 +33,7 @@ you can place your desire Frameworks.
         ...
 ...
 ```
-Above is an example of Laravel and Symfony frameworks added to ``/thirdparty`` directory.
+Above is an example of Laravel and Symfony frameworks added to ``/thirdparty`` directory.<br/>
 **Note:** You can decide what would be the name of the framework directory name 
 and then apply it on your configuration below.
 
