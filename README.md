@@ -29,7 +29,7 @@ For example 'laravel/public/index.php'. DO NOT include the ``/thirdparty`` direc
 Frameworks response MUST be modified to return the response content and the status of the request,
 here's an example of Laravel framework integration as third party framework.
 
-##### Laravel public/index.php 
+#### Laravel public/index.php 
 At the last part of the code in ``public/index.php`` file, Laravel is generating the response by calling ``$response->send()`` method
 from ``Response`` Object then after terminated the application by ``$kernel->terminate($request, $response)``, as code syntax below:
 ```
