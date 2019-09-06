@@ -17,16 +17,19 @@ When executing the third party framework a config data MUST be declared in the c
 the application to be executed, this can be done by adding this data array on the config file:
 ```
 'third-party-framework' => [
-    'index-path' => []
+    'index-path' => [
+        'laravel/public/index.php'
+    ]
 ],
 ```
 ``'index-path'`` must set the path of the application index.php file inside ``/thirdparty`` in the root directory. 
-For example 'laravel/public/index.php' do not includes the ``/thirdparty`` directory in the path.
+For example 'laravel/public/index.php'. DO NOT include the ``/thirdparty`` directory in the path.
 
-### Frameworks index.php
-Frameworks response MUST modify to return the response content and the status of the request,
-here's an example of Laravel framework integration as third party framework
+### Third Party Frameworks modification
+Frameworks response MUST be modified to return the response content and the status of the request,
+here's an example of Laravel framework integration as third party framework.
 
+##### Laravel public/index.php 
 At the last part of the code in ``public/index.php`` file, Laravel is generating the response by calling ``$response->send()`` method
 from ``Response`` Object then after terminated the application by ``$kernel->terminate($request, $response)``, as code syntax below:
 ```
