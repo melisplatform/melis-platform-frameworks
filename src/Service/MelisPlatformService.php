@@ -50,16 +50,16 @@ class MelisPlatformService implements ServiceLocatorAwareInterface, EventManager
              * use CURl to get the content of the request
              * if CURl extension is available
              */
-//            if(function_exists('curl_version')){
-//                $curl = curl_init();
-//                curl_setopt($curl, CURLOPT_URL, $url);
-//                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-//                curl_setopt($curl, CURLOPT_HEADER, false);
-//                curl_setopt($curl, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
-//                session_write_close();
-//                $responseContent = curl_exec($curl);
-//                curl_close($curl);
-//            }else {
+            if(function_exists('curl_version')){
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_HEADER, false);
+                curl_setopt($curl, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
+                session_write_close();
+                $responseContent = curl_exec($curl);
+                curl_close($curl);
+            }else {
                 $opts = [
                     'http' => [
                         'header' => 'Cookie: ' . $_SERVER['HTTP_COOKIE']
@@ -69,7 +69,7 @@ class MelisPlatformService implements ServiceLocatorAwareInterface, EventManager
                 session_write_close();
 
                 $responseContent = file_get_contents($url, false, $context);
-//            }
+            }
         }catch (\Exception $e){
             return $e->getMessage();
         }
