@@ -10,6 +10,7 @@
 namespace MelisPlatformFrameworks;
 
 use MelisPlatformFrameworks\Listener\MelisDispatchThirdPartyListener;
+use MelisPlatformFrameworks\Listener\MelisPlatformFrameworksDowndloadFWSkeletonListener;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
@@ -23,6 +24,7 @@ class Module
         $moduleRouteListener->attach($eventManager);
 
         $eventManager->attach(new MelisDispatchThirdPartyListener());
+        $eventManager->attach(new MelisPlatformFrameworksDowndloadFWSkeletonListener());
     }
 
     public function getConfig()
