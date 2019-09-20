@@ -45,7 +45,7 @@ class MelisPlatformService implements ServiceLocatorAwareInterface, EventManager
     {
         try{
             //prepare the url
-            $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'].':8080'.$this->geRoute();
+            $url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['SERVER_NAME'].$this->geRoute();
             /**
              * use CURl to get the content of the request
              * if CURl extension is available

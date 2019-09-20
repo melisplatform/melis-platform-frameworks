@@ -3,12 +3,14 @@
 /**
  * Melis Technology (http://www.melistechnology.com)
  *
- * @copyright Copyright (c) 2015 Melis Technology (http://www.melistechnology.com)
+ * @copyright Copyright (c) 2019 Melis Technology (http://www.melistechnology.com)
  *
  */
 
-namespace MelisCore\Listener;
+namespace MelisPlatformFrameworks\Listener;
 
+use MelisCore\Listener\MelisCoreGeneralListener;
+use MelisPlatformFrameworks\Support\MelisPlatformFrameworks;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 
@@ -20,41 +22,19 @@ class MelisPlatformFrameworksDowndloadFWSkeletonListener extends MelisCoreGenera
         $sharedEvents = $events->getSharedManager();
 
         $callBackHandler = $sharedEvents->attach(
-            'MelisCore',
+            '*',
             [
-                'melis_core_auth_login_ok',
+                'melis_platform_frameworks_download_framework_skeleton',
             ],
             function ($e) {
-
-                $sm = $e->getTarget()->getServiceLocator();
-                $table = $sm->get('MelisUserConnectionDate');
                 $params = $e->getParams();
-                $userTable = $sm->get('MelisCoreTableUser');
-                $authSvc = $sm->get('MelisCoreAuth');
+                $result = '';
 
-                // update the session last_login_date
-                $user = $authSvc->getStorage()->read();
-
-                if (!empty($user)) {
-                    $user->usr_last_login_date = $params['login_date'];
-                    $isOnline = (bool) $user->usr_is_online;
-
-                    if (!$isOnline) {
-                        $table->save([
-                            'usrcd_usr_login' => $params['usr_id'],
-                            'usrcd_last_login_date' => $params['login_date'],
-                            'usrcd_last_connection_time' => $params['login_date'],
-                        ]);
-                    }
-
-                    $userTable->save([
-                        'usr_last_login_date' => $params['login_date'],
-                        'usr_is_online' => true,
-                    ], $params['usr_id']);
-
+                if(!empty($params['framework_name'])){
+                    $result = MelisPlatformFrameworks::downloadFrameworkSkeleton($params['framework_name']);
                 }
-            },
-            -10000);
+                return $result;
+            });
 
         $this->listeners[] = $callBackHandler;
     }
