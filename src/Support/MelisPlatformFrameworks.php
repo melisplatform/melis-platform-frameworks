@@ -18,7 +18,7 @@ class MelisPlatformFrameworks
 
         if(is_writable($thirdPartyFolder)) {
             //get frameworks config
-            $frameworksConfig = require __DIR__.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'module.config.php';
+            $frameworksConfig = require __DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'module.config.php';
             //get market place url
             $marketplace = $frameworksConfig['melis-marketplace-url'];
 
