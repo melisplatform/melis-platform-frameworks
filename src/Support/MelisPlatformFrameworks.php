@@ -8,13 +8,25 @@ class MelisPlatformFrameworks
      * Function to download framework skeleton
      *
      * @param $frameworkName
-     * @return string
+     * @return array
      */
     public static function downloadFrameworkSkeleton($frameworkName)
     {
         $tempZipFile = '';
-        $message = $frameworkName.' skeleton downloaded successfully';
-        $thirdPartyFolder = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'thirdparty'.DIRECTORY_SEPARATOR;
+
+        $result = [
+            'success' => true,
+            'message' => ucfirst($frameworkName).' skeleton downloaded successfully'
+        ];
+
+        //third party file
+        $thirdPartyFolder = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'thirdparty';
+        //create thirdparty folder if not exist
+        if(!file_exists($thirdPartyFolder)) {
+            mkdir($thirdPartyFolder);
+            chmod($thirdPartyFolder, 0777);
+        }
+        $thirdPartyFolder .= DIRECTORY_SEPARATOR;
 
         if(is_writable($thirdPartyFolder)) {
             //get frameworks config
@@ -40,7 +52,8 @@ class MelisPlatformFrameworks
                      */
                     if($retCode != '200'){
                         //cannot find zip file
-                        $message = 'Error on downloading framework zip file.';
+                        $result['success'] = false;
+                        $result['message'] = 'Error on downloading framework zip file.';
                     }
                     curl_close($ch);
                 } else {
@@ -52,7 +65,8 @@ class MelisPlatformFrameworks
                      */
                     if(!strpos($fileHeaders[0], '200')){
                         //cannot find zip file
-                        $message = 'Error on downloading framework zip file.';
+                        $result['success'] = false;
+                        $result['message'] = 'Error on downloading framework zip file.';
                     }
                 }
 
@@ -66,7 +80,8 @@ class MelisPlatformFrameworks
                 fclose($file);
 
             }catch (\Exception $ex){
-                $message = $ex->getMessage();
+                $result['success'] = false;
+                $result['message'] = $ex->getMessage();
             }
 
             /**
@@ -81,21 +96,24 @@ class MelisPlatformFrameworks
                     // extract it to thirdparty folder
                     if(!$zip->extractTo($thirdPartyFolder)){
                         //cannot extract zip file
-                        $message = 'Cannot extract zip file inside thirdparty folder.';
+                        $result['success'] = false;
+                        $result['message'] = 'Cannot extract zip file inside thirdparty folder.';
                     }
                     $zip->close();
                 }else{
                     //cannot open temporary zip file to extract
-                    $message = 'Cannot open zip file on thirdparty folder.';
+                    $result['success'] = false;
+                    $result['message'] = 'Cannot open zip file on thirdparty folder.';
                 }
                 //remove the temporary zip file
                 unlink($tempZipFile);
             }
         }else{
             //thirdpary folder not writable
-            $message = 'Thirdparty folder is not writable.';
+            $result['success'] = false;
+            $result['message'] = 'Thirdparty folder is not writable.';
         }
 
-        return $message;
+        return $result;
     }
 }
