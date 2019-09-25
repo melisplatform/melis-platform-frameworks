@@ -15,7 +15,9 @@
     "module"
   ],
   "extra": {
-    "module-name": "MelisPlatformFrameworks"
+    "module-name": "MelisPlatformFrameworks",
+    "melis-site": false,
+    "melis-module-category": "core"
   },
   "require": {
     "melisplatform/melis-core": "^3.1"
