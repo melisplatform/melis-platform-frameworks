@@ -19,8 +19,10 @@ class MelisPlatformFrameworks
             'message' => ucfirst($frameworkName).' skeleton downloaded successfully'
         ];
 
+        $isCliReqs = php_sapi_name() == 'cli' ? true : false;
+
         //third party file
-        $thirdPartyFolder = $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'thirdparty';
+        $thirdPartyFolder = !$isCliReqs ? $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'thirdparty' : 'thirdparty';
         //create thirdparty folder if not exist
         if(!file_exists($thirdPartyFolder)) {
             mkdir($thirdPartyFolder);
