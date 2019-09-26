@@ -1,0 +1,11 @@
+<melis-platform-frameworks>
+	<package_info>
+		<mp_title>Melis Platform Frameworks</mp_title>
+		<mp_subtitle>This Module handles the execution of Third party framework and return the content as response of the request.</mp_subtitle>
+		<mp_description>
+			Melis Platform Frameworks
+		</mp_description>
+		<mp_maintainers>melisplatform</mp_maintainers>
+		<mp_group>Melis Core</mp_group>
+	</package_info>
+</melis-platform-frameworks>
