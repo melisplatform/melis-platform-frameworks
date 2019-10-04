@@ -28,7 +28,7 @@ class MelisPlatformFrameworks
             mkdir($thirdPartyFolder);
             chmod($thirdPartyFolder, 0777);
         }
-        $thirdPartyFolder .= DIRECTORY_SEPARATOR;
+//        $thirdPartyFolder .= DIRECTORY_SEPARATOR;
 
         if(is_writable($thirdPartyFolder)) {
             //get frameworks config
