@@ -28,7 +28,10 @@ class MelisPlatformFrameworksDowndloadFWSkeletonListener extends MelisCoreGenera
             ],
             function ($e) {
                 $params = $e->getParams();
-                $result = '';
+                $result = [
+                    'success' => false,
+                    'message' => 'Unable to download framework'
+                ];
 
                 if(!empty($params['framework_name'])){
                     $result = MelisPlatformFrameworks::downloadFrameworkSkeleton($params['framework_name']);
