@@ -17,8 +17,7 @@
   "extra": {
     "module-name": "MelisPlatformFrameworks",
     "melis-site": false,
-    "melis-module-category": "core",
-    "dbdeploy": true
+    "melis-module-category": "core"
   },
   "require": {
     "melisplatform/melis-core": "^3.1"
@@ -27,10 +26,5 @@
     "psr-4": {
       "MelisPlatformFrameworks\\": "src/"
     }
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "@php thirdpart-mkdir"
-    ]
   }
 }
