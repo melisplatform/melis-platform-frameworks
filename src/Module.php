@@ -88,7 +88,7 @@ class Module
                      * Using file path
                      */
                     if (!empty($configTrans['files'])){
-                        foreach ($configTrans['file'] As $tFile)
+                        foreach ($configTrans['files'] As $tFile)
                             if (is_file($tFile))
                                 $translator->addTranslationFile('phparray', $tFile);
                     }
