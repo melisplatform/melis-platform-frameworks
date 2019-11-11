@@ -68,20 +68,42 @@ class Module
             $config = $sm->get('config');
 
             if (!empty($config['third-party-framework']))
-                if (!empty($config['third-party-framework']['translations']))
-                    foreach ($config['third-party-framework']['translations'] As $val){
-                        if (is_array($val))
-                            foreach ($val As $class){
-                                $file = $class::translationFile($locale);
-                                if (file_exists($file))
-                                    $translator->addTranslationFile('phparray', $file);
-                            }
-                        else{
+                if (!empty($config['third-party-framework']['translations'])){
+
+                    $configTrans = $config['third-party-framework']['translations'];
+
+                    /**
+                     * Retrieving translation from config
+                     */
+                    if (!empty($configTrans['locale'])){
+                        if ($configTrans['locale'][$locale]){
+                            $transFiles = $configTrans['locale'][$locale];
+                            foreach ($transFiles As $tFile)
+                                if (is_file($tFile))
+                                    $translator->addTranslationFile('phparray', $tFile);
+                        }
+                    }
+
+                    /**
+                     * Using file path
+                     */
+                    if (!empty($configTrans['files'])){
+                        foreach ($configTrans['file'] As $tFile)
+                            if (is_file($tFile))
+                                $translator->addTranslationFile('phparray', $tFile);
+                    }
+
+                    /**
+                     * Using namespace path
+                     */
+                    if (!empty($configTrans['namespace'])){
+                        foreach ($configTrans['namespace'] As $val){
                             $file = $val::translationFile($locale);
                             if (file_exists($file))
                                 $translator->addTranslationFile('phparray', $file);
                         }
                     }
+                }
         }
     }
 }

@@ -9,7 +9,26 @@
 
 return [
     'third-party-framework' => [
-        'index-path' => []
+        'index-path' => [],
+        'translations' => [
+            /**
+             * Translation from locale
+             */
+            'locale' => [
+                'en_EN' => [],
+                'fr_FR' => []
+            ],
+            /**
+             * File path that will return an Array of
+             * translations
+             */
+            'files' => [],
+            /**
+             * Namespace to the Class with the static function "translationFile($locale)"
+             * parameter of "locale" from melis-core language locale
+             */
+            'namespace' => []
+        ]
     ],
     'third-party-framework-skeleton' => [
         'laravel' => '/frameworks/laravel-6-skeleton-melis.zip',
