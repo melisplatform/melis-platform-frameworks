@@ -28,7 +28,6 @@ class MelisPlatformFrameworks
             mkdir($thirdPartyFolder);
             chmod($thirdPartyFolder, 0777);
         }
-//        $thirdPartyFolder .= DIRECTORY_SEPARATOR;
 
         if(is_writable($thirdPartyFolder)) {
             //get frameworks config
@@ -109,6 +108,9 @@ class MelisPlatformFrameworks
                 }
                 //remove the temporary zip file
                 unlink($tempZipFile);
+            }else{
+                $result['success'] = false;
+                $result['message'] = 'Cannot find path: '.$tempZipFile;
             }
         }else{
             //thirdpary folder not writable
