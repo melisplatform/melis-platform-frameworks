@@ -76,7 +76,7 @@ class MelisPlatformFrameworks
                  * Create temporary file to store
                  * the framework skeleton
                  */
-                $tempZipFile = $thirdPartyFolder . "temp_file.zip";
+                $tempZipFile = $thirdPartyFolder .DIRECTORY_SEPARATOR. "temp_file.zip";
                 $file = fopen($tempZipFile, "w+");
                 fputs($file, $fwSkeleton);
                 fclose($file);
