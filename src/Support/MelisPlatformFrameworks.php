@@ -28,7 +28,6 @@ class MelisPlatformFrameworks
             mkdir($thirdPartyFolder);
             chmod($thirdPartyFolder, 0777);
         }
-//        $thirdPartyFolder .= DIRECTORY_SEPARATOR;
 
         if(is_writable($thirdPartyFolder)) {
             //get frameworks config
@@ -76,7 +75,7 @@ class MelisPlatformFrameworks
                  * Create temporary file to store
                  * the framework skeleton
                  */
-                $tempZipFile = $thirdPartyFolder . "temp_file.zip";
+                $tempZipFile = $thirdPartyFolder .DIRECTORY_SEPARATOR. "temp_file.zip";
                 $file = fopen($tempZipFile, "w+");
                 fputs($file, $fwSkeleton);
                 fclose($file);
@@ -109,6 +108,9 @@ class MelisPlatformFrameworks
                 }
                 //remove the temporary zip file
                 unlink($tempZipFile);
+            }else{
+                $result['success'] = false;
+                $result['message'] = 'Cannot find path: '.$tempZipFile;
             }
         }else{
             //thirdpary folder not writable
