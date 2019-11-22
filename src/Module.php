@@ -11,6 +11,7 @@ namespace MelisPlatformFrameworks;
 
 use MelisPlatformFrameworks\Listener\MelisDispatchThirdPartyListener;
 use MelisPlatformFrameworks\Listener\MelisPlatformFrameworksDowndloadFWSkeletonListener;
+use MelisPlatformFrameworks\Listener\MelisThirdPartyCreateToolListener;
 use MelisPlatformFrameworks\Support\MelisPlatformFrameworks;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -27,6 +28,7 @@ class Module
 
         $eventManager->attach(new MelisDispatchThirdPartyListener());
         $eventManager->attach(new MelisPlatformFrameworksDowndloadFWSkeletonListener());
+        $eventManager->attach(new MelisThirdPartyCreateToolListener());
 
         $this->createTranslations($e);
     }

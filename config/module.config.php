@@ -30,6 +30,12 @@ return [
             'namespace' => []
         ]
     ],
+    'third-party-framework-setup-class' => [
+        'MelisPlatformFrameworkLaravel\LaravelModuleCreator',
+        'MelisPlatformFrameworkSymfony\SymfonyModuleCreator',
+        'MelisPlatformFrameworkLumen\LumenModuleCreator',
+        'MelisPlatformFrameworkSilex\SilexModuleCreator',
+    ],
     'third-party-framework-skeleton' => [
         'laravel' => '/frameworks/laravel-6-skeleton-melis.zip',
         'symfony' => '/frameworks/symfony-4-skeleton-melis.zip',
