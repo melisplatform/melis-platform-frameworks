@@ -30,7 +30,7 @@ class MelisThirdPartyCreateToolListener implements ListenerAggregateInterface
                 $config = $sm-> get('config');
 
                 foreach ($config['third-party-framework-setup-class'] As $class){
-                    if (class_exists($frmwrk))
+                    if (class_exists($class))
                         $class::run(get_object_vars($params));
                 }
 
