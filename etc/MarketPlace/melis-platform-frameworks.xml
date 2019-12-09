@@ -1,11 +1,20 @@
 <melis-platform-frameworks>
 	<package_info>
 		<mp_title>Melis Platform Frameworks</mp_title>
-		<mp_subtitle>This Module handles the execution of Third party framework and return the content as response of the request.</mp_subtitle>
+		<mp_subtitle>The module that activates cross framework on the platform.</mp_subtitle>
 		<mp_description>
-			Melis Platform Frameworks
+			<![CDATA[
+				<p>MelisPlatformFrameworks activates the cross framework on the platform, allowing to use other frameworks than Zend, like Symfony, Laravel or Lumen.<br />This will provide listeners and services to use when developping in a different framework, allowing to integrate inside the platform.</p>
+			]]>
 		</mp_description>
 		<mp_maintainers>melisplatform</mp_maintainers>
 		<mp_group>Melis Core</mp_group>
 	</package_info>
+	<package_images>
+		<img_1>
+			<mpi_image_title>Frameworks available in MelisPlatform</mpi_image_title>
+			<mpi_image_file>melis-platform-frameworks-1.jpg</mpi_image_file>
+			<mpi_image_main>1</mpi_image_main>
+		</img_1>
+	</package_images>
 </melis-platform-frameworks>
