@@ -20,7 +20,7 @@
     "melis-module-category": "core"
   },
   "require": {
-    "melisplatform/melis-core": "^3.1"
+    "melisplatform/melis-core": "*"
   },
   "autoload": {
     "psr-4": {
