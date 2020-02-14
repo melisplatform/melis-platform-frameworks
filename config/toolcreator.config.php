@@ -1,18 +1,6 @@
 <?php
 
 return [
-    'frameworks' => [
-        'laravel',
-        'symfony',
-        'lumen',
-        'silex',
-    ],
-    'framework-setup' => [
-        'laravel' => 'url/route',
-        'symfony',
-        'lumen',
-        'silex',
-    ],
     'form-elements' => [
         'elements' => [
             [
@@ -20,17 +8,17 @@ return [
                     'type' => 'Checkbox',
                     'name' => 'tcf-create-framework-tool',
                     'options' => [
-                        'label' => 'tr_melistoolcreator_tcf-create-framework-tool',
-                        'tooltip' => 'tr_melistoolcreator_tcf-create-framework-tool tooltip',
+                        'label' => 'tr_melis_platform_frameworks_tcf-create-framework-tool',
+                        'tooltip' => 'tr_melis_platform_frameworks_tcf-create-framework-tool tooltip',
                         'switch_options' => [
-                            'label-on' => 'tr_melistoolcreator_yes',
-                            'label-off' => 'tr_melistoolcreator_no',
+                            'label-on' => 'tr_melis_platform_frameworks_yes',
+                            'label-off' => 'tr_melis_platform_frameworks_no',
                             'icon' => "glyphicon glyphicon-resize-horizontal",
                         ],
                     ],
                     'attributes' => [
                         'id' => 'tcf-create-framework-tool',
-                        'class' => 'tcf-tool-type tcf-tool-type-db tcf-tool-type-blank',
+                        'required' => 'required',
                     ],
                 ],
             ],
@@ -39,8 +27,8 @@ return [
                     'type' => 'Radio',
                     'name' => 'tcf-tool-framework',
                     'options' => [
-                        'label' => 'tr_melistoolcreator_tcf-tool-framework',
-                        'tooltip' => 'tr_melistoolcreator_tcf-tool-framework tooltip',
+                        'label' => 'tr_melis_platform_frameworks_tcf-tool-framework',
+                        'tooltip' => 'tr_melis_platform_frameworks_tcf-tool-framework tooltip',
                         'radio-button' => true,
                         'label_options' => [
                             'disable_html_escape' => true,

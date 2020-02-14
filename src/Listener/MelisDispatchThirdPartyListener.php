@@ -67,7 +67,7 @@ class MelisDispatchThirdPartyListener implements ListenerAggregateInterface
                      * To validate the result from the Third party framework
                      * the index file need to modify
                      */
-                    if ($response['statusCode'] === 200){
+                    if ($response['statusCode'] === 200 || true){
                         $content = $response['content'];
                         break;
                     }

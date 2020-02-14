@@ -12,6 +12,7 @@ namespace MelisPlatformFrameworks;
 use MelisPlatformFrameworks\Listener\MelisDispatchThirdPartyListener;
 use MelisPlatformFrameworks\Listener\MelisPlatformFrameworksDowndloadFWSkeletonListener;
 use MelisPlatformFrameworks\Listener\MelisThirdPartyCreateToolListener;
+use MelisPlatformFrameworks\Listener\MelisToolCreatorFormListener;
 use MelisPlatformFrameworks\Support\MelisPlatformFrameworks;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -30,6 +31,7 @@ class Module
         $eventManager->attach(new MelisDispatchThirdPartyListener());
         $eventManager->attach(new MelisPlatformFrameworksDowndloadFWSkeletonListener());
         $eventManager->attach(new MelisThirdPartyCreateToolListener());
+        $eventManager->attach(new MelisToolCreatorFormListener());
 
         $this->createTranslations($e);
     }
@@ -37,40 +39,6 @@ class Module
     public function getConfig()
     {
         $config = include __DIR__ . '/../config/module.config.php';
-
-        // Existing frameworks
-        $frameworks = [];
-        $thirdPartyDir = require __DIR__.'/../config/frameworks.php';
-        foreach ($thirdPartyDir['frameworks'] As $pf) {
-            // Checking if the module exist in the vendor directory
-            $pfDir = __DIR__ .'/../../melis-platform-framework-'.$pf;
-            if (is_dir($pfDir))
-                $frameworks[$pf] = ucfirst($pf);
-        }
-
-        $toolsConfig = include __DIR__ . '/../config/app.tools.php';
-
-        if (!empty($frameworks)) {
-
-            // Frameworks that available to generate tool
-            $thirdPartyDir['form-elements']['elements'][1]['spec']['options']['value_options'] = $frameworks;
-            // Getting the first data to be the default selected item
-            foreach ($frameworks As $key => $fw) {
-                $thirdPartyDir['form-elements']['elements'][1]['spec']['attributes']['value'] = $key;
-                break;
-            }
-
-            // Adding to the form config
-            // Form elements
-            foreach ($thirdPartyDir['form-elements']['elements'] As $spcs)
-                $toolsConfig['plugins']['melistoolcreator']['forms']['melistoolcreator_step1_form']['elements'][] = $spcs;
-            // Form elements filters
-            foreach ($thirdPartyDir['form-elements']['input_filter'] As $spcs)
-                $toolsConfig['plugins']['melistoolcreator']['forms']['melistoolcreator_step1_form']['input_filter'][] = $spcs;
-        }
-
-        // Adding to final config
-        $config = ArrayUtils::merge($config, $toolsConfig);
 
         return $config;
     }
@@ -103,9 +71,40 @@ class Module
         if (!empty($locale)) {
             $translator = $sm->get('translator');
 
+            // Module translations
+            $translationType = [
+                'interface'
+            ];
+
+            $translationList = [];
+            if(file_exists($_SERVER['DOCUMENT_ROOT'].'/../module/MelisModuleConfig/config/translation.list.php')){
+                $translationList = include 'module/MelisModuleConfig/config/translation.list.php';
+            }
+
+            foreach($translationType as $type){
+
+                $transPath = '';
+                $moduleTrans = __NAMESPACE__."/$locale.$type.php";
+
+                if(in_array($moduleTrans, $translationList)){
+                    $transPath = 'module/MelisModuleConfig/languages/'.$moduleTrans;
+                }
+
+                if(empty($transPath)){
+
+                    // if translation is not found, use melis default translations
+                    $defaultLocale = (file_exists(__DIR__ . "/../language/$locale.$type.php"))? $locale : 'en_EN';
+                    $transPath = __DIR__ . "/../language/$defaultLocale.$type.php";
+                }
+
+                $translator->addTranslationFile('phparray', $transPath);
+            }
+
+            // Retreiving translation from Third party
             $config = $sm->get('config');
 
-            if (!empty($config['third-party-framework']))
+            if (!empty($config['third-party-framework'])) {
+
                 if (!empty($config['third-party-framework']['translations'])){
 
                     $configTrans = $config['third-party-framework']['translations'];
@@ -142,6 +141,7 @@ class Module
                         }
                     }
                 }
+            }
         }
     }
 }
