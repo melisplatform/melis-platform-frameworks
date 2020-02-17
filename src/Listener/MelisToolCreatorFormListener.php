@@ -52,8 +52,6 @@ class MelisToolCreatorFormListener implements ListenerAggregateInterface
                             break;
                         }
 
-                        $toolsConfig = [];
-
                         // Adding to the form config
                         // Form elements
                         foreach ($thirdPartyDir['form-elements']['elements'] As $spcs)
