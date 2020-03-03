@@ -11,10 +11,13 @@ namespace MelisPlatformFrameworks;
 
 use MelisPlatformFrameworks\Listener\MelisDispatchThirdPartyListener;
 use MelisPlatformFrameworks\Listener\MelisPlatformFrameworksDowndloadFWSkeletonListener;
+use MelisPlatformFrameworks\Listener\MelisThirdPartyCreateToolListener;
+use MelisPlatformFrameworks\Listener\MelisToolCreatorFormListener;
 use MelisPlatformFrameworks\Support\MelisPlatformFrameworks;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Container;
+use Zend\Stdlib\ArrayUtils;
 
 
 class Module
@@ -27,6 +30,8 @@ class Module
 
         $eventManager->attach(new MelisDispatchThirdPartyListener());
         $eventManager->attach(new MelisPlatformFrameworksDowndloadFWSkeletonListener());
+        $eventManager->attach(new MelisThirdPartyCreateToolListener());
+        $eventManager->attach(new MelisToolCreatorFormListener());
 
         $this->createTranslations($e);
     }
@@ -34,6 +39,7 @@ class Module
     public function getConfig()
     {
         $config = include __DIR__ . '/../config/module.config.php';
+
         return $config;
     }
 
@@ -65,9 +71,40 @@ class Module
         if (!empty($locale)) {
             $translator = $sm->get('translator');
 
+            // Module translations
+            $translationType = [
+                'interface'
+            ];
+
+            $translationList = [];
+            if(file_exists($_SERVER['DOCUMENT_ROOT'].'/../module/MelisModuleConfig/config/translation.list.php')){
+                $translationList = include 'module/MelisModuleConfig/config/translation.list.php';
+            }
+
+            foreach($translationType as $type){
+
+                $transPath = '';
+                $moduleTrans = __NAMESPACE__."/$locale.$type.php";
+
+                if(in_array($moduleTrans, $translationList)){
+                    $transPath = 'module/MelisModuleConfig/languages/'.$moduleTrans;
+                }
+
+                if(empty($transPath)){
+
+                    // if translation is not found, use melis default translations
+                    $defaultLocale = (file_exists(__DIR__ . "/../language/$locale.$type.php"))? $locale : 'en_EN';
+                    $transPath = __DIR__ . "/../language/$defaultLocale.$type.php";
+                }
+
+                $translator->addTranslationFile('phparray', $transPath);
+            }
+
+            // Retreiving translation from Third party
             $config = $sm->get('config');
 
-            if (!empty($config['third-party-framework']))
+            if (!empty($config['third-party-framework'])) {
+
                 if (!empty($config['third-party-framework']['translations'])){
 
                     $configTrans = $config['third-party-framework']['translations'];
@@ -104,6 +141,7 @@ class Module
                         }
                     }
                 }
+            }
         }
     }
 }
