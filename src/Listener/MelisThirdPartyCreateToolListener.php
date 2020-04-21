@@ -9,22 +9,22 @@
 
 namespace MelisPlatformFrameworks\Listener;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\Application;
-use Zend\Session\Container;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\Mvc\Application;
+use Laminas\Session\Container;
+use MelisCore\Listener\MelisGeneralListener;
 
-class MelisThirdPartyCreateToolListener implements ListenerAggregateInterface
+class MelisThirdPartyCreateToolListener extends MelisGeneralListener implements ListenerAggregateInterface
 {
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $sharedEvents = $events->getSharedManager();
-
-        $callBackHandler = $sharedEvents->attach(
+        $this->attachEventListener(
+            $events,
             '*',
             'melis_tool_creator_generate_tool_end',
             function($e){
-                $sm = $e->getTarget()->getServiceLocator();
+                $sm = $e->getTarget()->getServiceManager();
                 $params = $e->getParams();
 
                 $config = $sm-> get('config');
@@ -33,19 +33,7 @@ class MelisThirdPartyCreateToolListener implements ListenerAggregateInterface
                     if (class_exists($class))
                         $class::run(get_object_vars($params));
                 }
-
-            });
-
-        $this->listeners[] = $callBackHandler;
-    }
-
-
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
             }
-        }
+        );
     }
 }

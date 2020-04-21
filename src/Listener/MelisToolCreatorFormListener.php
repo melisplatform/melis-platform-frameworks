@@ -9,18 +9,18 @@
 
 namespace MelisPlatformFrameworks\Listener;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\Application;
-use Zend\Session\Container;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\Mvc\Application;
+use Laminas\Session\Container;
+use MelisCore\Listener\MelisGeneralListener;
 
-class MelisToolCreatorFormListener implements ListenerAggregateInterface
+class MelisToolCreatorFormListener extends MelisGeneralListener implements ListenerAggregateInterface
 {
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $sharedEvents = $events->getSharedManager();
-
-        $callBackHandler = $sharedEvents->attach(
+        $this->attachEventListener(
+            $events,
             '*',
             'melis_core_config_get_item_rec',
             function($e){
@@ -29,7 +29,7 @@ class MelisToolCreatorFormListener implements ListenerAggregateInterface
 
                 if ($params['pathString'] == 'melistoolcreator_step1_form') {
 
-                    $sm = $e->getTarget()->getServiceLocator();
+                    $sm = $e->getTarget()->getServiceManager();
                     $config = $sm->get('config');
 
                     if (empty($config['tool-creator-third-party-frameworks']))
@@ -61,18 +61,7 @@ class MelisToolCreatorFormListener implements ListenerAggregateInterface
                             $params['config']['input_filter'][] = $spcs;
                     }
                 }
-            });
-
-        $this->listeners[] = $callBackHandler;
-    }
-
-
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $listener) {
-            if ($events->detach($listener)) {
-                unset($this->listeners[$index]);
             }
-        }
+        );
     }
 }

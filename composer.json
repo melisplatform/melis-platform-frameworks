@@ -1,30 +1,30 @@
 {
-  "name": "melisplatform/melis-platform-frameworks",
-  "description": "Melis Platform Frameworks",
-  "type": "melisplatform-module",
-  "license": "OSL-3.0",
-  "homepage": "https://github.com/melisplatform/melis-platform-frameworks",
-  "support": {
-    "source": "https://github.com/melisplatform/melis-platform-frameworks",
-    "issues": "https://github.com/melisplatform/melis-platform-frameworks/issues"
-  },
-  "keywords": [
-    "cms",
-    "melis",
-    "zf2",
-    "module"
-  ],
-  "extra": {
-    "module-name": "MelisPlatformFrameworks",
-    "melis-site": false,
-    "melis-module-category": "core"
-  },
-  "require": {
-    "melisplatform/melis-core": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "MelisPlatformFrameworks\\": "src/"
+    "name": "melisplatform/melis-platform-frameworks",
+    "description": "Melis Platform Frameworks",
+    "type": "melisplatform-module",
+    "license": "OSL-3.0",
+    "homepage": "https://github.com/melisplatform/melis-platform-frameworks",
+    "support": {
+        "source": "https://github.com/melisplatform/melis-platform-frameworks",
+        "issues": "https://github.com/melisplatform/melis-platform-frameworks/issues"
+    },
+    "keywords": [
+        "cms",
+        "melis",
+        "zf2",
+        "module"
+    ],
+    "extra": {
+        "module-name": "MelisPlatformFrameworks",
+        "melis-site": false,
+        "melis-module-category": "core"
+    },
+    "require": {
+        "melisplatform/melis-core": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MelisPlatformFrameworks\\": "src/"
+        }
     }
-  }
 }

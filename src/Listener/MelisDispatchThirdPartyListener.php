@@ -9,10 +9,10 @@
 
 namespace MelisPlatformFrameworks\Listener;
 
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
-use Zend\Mvc\Application;
-use Zend\Session\Container;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
+use Laminas\Mvc\Application;
+use Laminas\Session\Container;
 
 /**
  * This listener listen to prospects events in order to add entries in the
@@ -20,7 +20,9 @@ use Zend\Session\Container;
  */
 class MelisDispatchThirdPartyListener implements ListenerAggregateInterface
 {
-    public function attach(EventManagerInterface $events)
+    public $application;
+
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
         /**
          * Route not exist in zend application this will
@@ -33,6 +35,8 @@ class MelisDispatchThirdPartyListener implements ListenerAggregateInterface
     public function onDispatchError($e)
     {
         if ($e->getError() == Application::ERROR_ROUTER_NO_MATCH) {
+
+            $this->application = $e->getApplication();
 
             /**
              * In-order to execute the Third party framework
