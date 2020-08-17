@@ -113,7 +113,7 @@ class Module
                      * Retrieving translation from config
                      */
                     if (!empty($configTrans['locale'])){
-                        if ($configTrans['locale'][$locale]){
+                        if (!empty($configTrans['locale'][$locale])){
                             $transFiles = $configTrans['locale'][$locale];
                             foreach ($transFiles As $tFile)
                                 if (is_file($tFile))
