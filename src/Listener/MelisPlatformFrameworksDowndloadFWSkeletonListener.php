@@ -9,19 +9,17 @@
 
 namespace MelisPlatformFrameworks\Listener;
 
-use MelisCore\Listener\MelisCoreGeneralListener;
+use MelisCore\Listener\MelisGeneralListener;
 use MelisPlatformFrameworks\Support\MelisPlatformFrameworks;
-use Zend\EventManager\EventManagerInterface;
-use Zend\EventManager\ListenerAggregateInterface;
+use Laminas\EventManager\EventManagerInterface;
+use Laminas\EventManager\ListenerAggregateInterface;
 
-class MelisPlatformFrameworksDowndloadFWSkeletonListener extends MelisCoreGeneralListener implements ListenerAggregateInterface
+class MelisPlatformFrameworksDowndloadFWSkeletonListener extends MelisGeneralListener implements ListenerAggregateInterface
 {
-
-    public function attach(EventManagerInterface $events)
+    public function attach(EventManagerInterface $events, $priority = 1)
     {
-        $sharedEvents = $events->getSharedManager();
-
-        $callBackHandler = $sharedEvents->attach(
+        $this->attachEventListener(
+            $events,
             '*',
             [
                 'melis_platform_frameworks_download_framework_skeleton',
@@ -37,8 +35,7 @@ class MelisPlatformFrameworksDowndloadFWSkeletonListener extends MelisCoreGenera
                     $result = MelisPlatformFrameworks::downloadFrameworkSkeleton($params['framework_name']);
                 }
                 return $result;
-            });
-
-        $this->listeners[] = $callBackHandler;
+            }
+        );
     }
 }

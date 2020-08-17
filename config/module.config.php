@@ -37,7 +37,7 @@ return [
         'MelisPlatformFrameworkSilex\SilexModuleCreator',
     ],
     'third-party-framework-skeleton' => [
-        'laravel' => '/frameworks/laravel-6-skeleton-melis.zip',
+        'laravel' => '/frameworks/laravel-6-skeleton-melis-laminas.zip',
         'symfony' => '/frameworks/symfony-4-skeleton-melis.zip',
         'lumen' => '/frameworks/lumen-5.8.12-skeleton-melis.zip',
         'silex' => '/frameworks/silex-2-skeleton-melis.zip',
@@ -45,10 +45,7 @@ return [
     'melis-marketplace-url' => 'http://marketplace.melisplatform.com',
     'service_manager' => [
         'aliases' => [
-            'translator' => 'MvcTranslator',
-        ],
-        'factories' => [
-            'MelisPlatformService' => 'MelisPlatformFrameworks\Service\Factory\MelisPlatformServiceFactory',
+            'MelisPlatformService' => \MelisPlatformFrameworks\Service\MelisPlatformService::class,
         ]
     ],
 ];

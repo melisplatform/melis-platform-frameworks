@@ -2,27 +2,14 @@
 
 namespace MelisPlatformFrameworks\Service;
 
-use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerInterface;
+use Laminas\EventManager\EventManagerAwareInterface;
+use Laminas\EventManager\EventManagerInterface;
+use MelisCore\Service\MelisServiceManager;
 
-class MelisPlatformService implements ServiceLocatorAwareInterface, EventManagerAwareInterface
+class MelisPlatformService extends MelisServiceManager implements EventManagerAwareInterface
 {
-    public $serviceLocator;
     public $eventManager;
     public $route;
-
-    public function setServiceLocator(ServiceLocatorInterface $sl)
-    {
-        $this->serviceLocator = $sl;
-        return $this;
-    }
-
-    public function getServiceLocator()
-    {
-        return $this->serviceLocator;
-    }
 
     public function setEventManager(EventManagerInterface $eventManager)
     {

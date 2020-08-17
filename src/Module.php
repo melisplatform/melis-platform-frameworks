@@ -14,10 +14,10 @@ use MelisPlatformFrameworks\Listener\MelisPlatformFrameworksDowndloadFWSkeletonL
 use MelisPlatformFrameworks\Listener\MelisThirdPartyCreateToolListener;
 use MelisPlatformFrameworks\Listener\MelisToolCreatorFormListener;
 use MelisPlatformFrameworks\Support\MelisPlatformFrameworks;
-use Zend\Mvc\ModuleRouteListener;
-use Zend\Mvc\MvcEvent;
-use Zend\Session\Container;
-use Zend\Stdlib\ArrayUtils;
+use Laminas\Mvc\ModuleRouteListener;
+use Laminas\Mvc\MvcEvent;
+use Laminas\Session\Container;
+use Laminas\Stdlib\ArrayUtils;
 
 
 class Module
@@ -28,10 +28,10 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 
-        $eventManager->attach(new MelisDispatchThirdPartyListener());
-        $eventManager->attach(new MelisPlatformFrameworksDowndloadFWSkeletonListener());
-        $eventManager->attach(new MelisThirdPartyCreateToolListener());
-        $eventManager->attach(new MelisToolCreatorFormListener());
+        (new MelisDispatchThirdPartyListener())->attach($eventManager);
+        (new MelisPlatformFrameworksDowndloadFWSkeletonListener())->attach($eventManager);
+        (new MelisThirdPartyCreateToolListener())->attach($eventManager);
+        (new MelisToolCreatorFormListener())->attach($eventManager);
 
         $this->createTranslations($e);
     }
@@ -46,7 +46,7 @@ class Module
     public function getAutoloaderConfig()
     {
         return [
-            'Zend\Loader\StandardAutoloader' => [
+            'Laminas\Loader\StandardAutoloader' => [
                 'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ]
