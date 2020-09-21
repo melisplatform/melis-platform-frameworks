@@ -43,6 +43,15 @@ class MelisPlatformService extends MelisServiceManager implements EventManagerAw
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl, CURLOPT_HEADER, false);
                 curl_setopt($curl, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
+
+                $config = $this->getServiceManager()->get('config');
+                $curlOptUser = $config['third-party-framework']['curl-opt-usrppwd']['username'];
+                $curlOptPwd = $config['third-party-framework']['curl-opt-usrppwd']['password'];
+                if(!empty($curlOptUser) && !empty($curlOptPwd)){
+                    //Specify the username and password using the CURLOPT_USERPWD option.
+                    curl_setopt($curl, CURLOPT_USERPWD, $curlOptUser.':'.$curlOptPwd);  
+                }
+
                 session_write_close();
                 $responseContent = curl_exec($curl);
                 curl_close($curl);
