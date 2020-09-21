@@ -28,6 +28,10 @@ return [
              * parameter of "locale" from melis-core language locale
              */
             'namespace' => []
+        ],
+        'curl-opt-usrppwd' => [
+            'username' => '',
+            'password' => ''
         ]
     ],
     'third-party-framework-setup-class' => [
