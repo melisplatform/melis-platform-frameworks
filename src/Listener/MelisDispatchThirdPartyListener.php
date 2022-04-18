@@ -67,6 +67,10 @@ class MelisDispatchThirdPartyListener implements ListenerAggregateInterface
                 if (file_exists($indexPath)){
                     $response = require_once $indexPath;
 
+                    //for the handling of symfony framework
+                    if (!is_array($response)) {                       
+                        $response = call_user_func_array($response, []);
+                    }                    
                     /**
                      * To validate the result from the Third party framework
                      * the index file need to modify

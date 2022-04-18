@@ -43,7 +43,8 @@ return [
     'third-party-framework-skeleton' => [
         //'laravel' => '/frameworks/laravel-6-skeleton-melis-laminas.zip',
         'laravel' => '/frameworks/laravel-8-skeleton-melis-laminas.zip',
-        'symfony' => '/frameworks/symfony-4-skeleton-melis.zip',
+        //'symfony' => '/frameworks/symfony-4-skeleton-melis.zip',
+        'symfony' => '/frameworks/symfony-5-skeleton-melis.zip',       
         //'lumen' => '/frameworks/lumen-5.8.12-skeleton-melis.zip',
         'lumen' => '/frameworks/lumen-8.1.2-skeleton-melis.zip',        
         'silex' => '/frameworks/silex-2-skeleton-melis.zip',
