@@ -41,8 +41,8 @@ return [
         'MelisPlatformFrameworkSilex\SilexModuleCreator',
     ],
     'third-party-framework-skeleton' => [
-        //'laravel' => '/frameworks/laravel-6-skeleton-melis-laminas.zip',
-        'laravel' => '/frameworks/laravel-8-skeleton-melis-laminas.zip',
+//        'laravel' => '/frameworks/laravel-8-skeleton-melis-laminas.zip',
+        'laravel' => '/frameworks/laravel-9-skeleton-melis-laminas.zip',
 //        'symfony' => '/frameworks/symfony-5-skeleton-melis.zip',
         'symfony' => '/frameworks/symfony-6-skeleton-melis.zip',
         //'lumen' => '/frameworks/lumen-5.8.12-skeleton-melis.zip',
